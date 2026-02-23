@@ -29,6 +29,8 @@ function addBookToLibrary(title, author, pages, read) {
     const id = crypto.randomUUID();
     const book = new Book(id, title, author, pages, read);
     myLibrary.push(book);
+    clearBooks();
+    displayBooks();
 }
 
 function clearBooks() {
@@ -39,13 +41,6 @@ function clearBooks() {
     }
 }
 
-// function submitForm() {
-//     let title = document.querySelector("#title");
-//     addBookToLibrary("book3", "isj", 38, true);
-//     clearBooks();
-//     displayBooks();
-// }
-
 const form = document.getElementById("form");
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -53,7 +48,9 @@ form.addEventListener('submit', (e) => {
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pageCount").value;
     let readStatus = document.getElementById("read").checked;
+    addBookToLibrary(title, author, pages, readStatus);
     clearForm();
+    document.getElementById('my-dialog').close();
 })
 
 function clearForm() {
@@ -98,4 +95,3 @@ function displayBooks() {
 
 addBookToLibrary("bob adventures","Isaac", 40, true);
 addBookToLibrary("Robby adventures","John", 50, false);
-displayBooks();
