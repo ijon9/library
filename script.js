@@ -1,34 +1,102 @@
 const myLibrary = []
 
-function Book(id, title, author, pages, read) {
-    this.id = id;
-    this.title = title;
-    this.author = author;
-    this.numPages = pages;
-    this.readStatus = read;
-}
-
-Book.prototype.toggleRead = function() {
-    this.readStatus = !this.readStatus;
-    clearBooks();
-    displayBooks();
-}
-
-Book.prototype.removeItem = function() {
-    const currId = this.id;
-    for(let i=0; i<myLibrary.length; i++) {
-        if(currId === myLibrary[i].id) {
-            myLibrary.splice(i, 1);
-        }
+class Book {
+    constructor(id, title, author, pages, read) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.numPages = pages;
+        this.readStatus = read;
     }
-    clearBooks();
-    displayBooks();
+
+    get id() {
+        return this._id;
+    }
+    
+    set id(value) {
+        this._id = value;
+    }
+
+    get title() {
+        return this._title;
+    }
+
+    set title(value) {
+        this._title = value;
+    }
+
+    get author() {
+        return this._author;
+    }
+
+    set author(value) {
+        this._author = value;
+    }
+
+    get numPages() {
+        return this._numPages;
+    }
+
+    set numPages(value) {
+        this._numPages = value;
+    }
+
+    get readStatus() {
+        return this._readStatus;
+    }
+
+    set readStatus(value) {
+        this._readStatus = value;
+    }
+    
+    toggleRead() {
+        this.readStatus = !this.readStatus;
+        clearBooks();
+        displayBooks();
+    }
+
+    removeItem() {
+        const currId = this.id;
+        for(let i=0; i<myLibrary.length; i++) {
+            if(currId === myLibrary[i].id) {
+                myLibrary.splice(i, 1);
+            }
+        }
+        clearBooks();
+        displayBooks();
+    }
 }
+
+// function Book(id, title, author, pages, read) {
+//     this.id = id;
+//     this.title = title;
+//     this.author = author;
+//     this.numPages = pages;
+//     this.readStatus = read;
+// }
+
+// Book.prototype.toggleRead = function() {
+//     this.readStatus = !this.readStatus;
+//     clearBooks();
+//     displayBooks();
+// }
+
+// Book.prototype.removeItem = function() {
+//     const currId = this.id;
+//     for(let i=0; i<myLibrary.length; i++) {
+//         if(currId === myLibrary[i].id) {
+//             myLibrary.splice(i, 1);
+//         }
+//     }
+//     clearBooks();
+//     displayBooks();
+// }
 
 function addBookToLibrary(title, author, pages, read) {
     const id = crypto.randomUUID();
     const book = new Book(id, title, author, pages, read);
     myLibrary.push(book);
+    // console.log(book);
     clearBooks();
     displayBooks();
 }
